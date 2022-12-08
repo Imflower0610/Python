@@ -178,3 +178,131 @@ for i in range(1,10):
 #45부터 109까지 출력
 for i in range(45,110):
     print(i)
+#1부터 100까지 출력하는데 3의 배수에서는 윤재영 출력 
+#5의 배수에서는 바보 출력
+
+#내가푼거
+for i in range(1,101):
+    if i%3==0 and i%5==0:
+        print("윤재영 바보")
+    elif i%3==0:
+        print("윤재영")
+    elif i%5==0:
+        print("바보")
+    else:
+        print(i)
+
+#쌤이 푼거
+for i in range(1,101):
+    if i%3==0:
+        print("윤재영", end="")
+    if i%5==0:
+        print("바보")
+    else:
+        print(i)
+
+
+#파이썬 데이터 타입
+#리스트, 튜플, 딕셔너리, 셋, 배열
+
+#리스트
+name = ["장영주바보","김지연똥개","윤재영멍청이"]
+
+data1 = ["김깅원원장", 100, 3.14, True]
+
+data2 = list(("최윤도서관","변수정과",100))
+
+print(data2[0])
+print(data2[-1]) #-1이면 0에서 한칸 뒤니까 맨 마지막인100출력
+
+data3 = ["이종빈티지","윤종찬양하라","이지현미밥맛있어","장영주모"]
+print( data3[1:3] )
+print(data3[:3])
+print(data3[2:])
+
+data3.append("김지연기하네")
+data3.append("윤재영영사랑해")
+print(data3)
+
+#데이터 삭제하기
+#1.실데이터를 통해 삭제
+data3.remove("장영주모")
+print(data3)
+
+#2.마지막 데이터 삭제
+data3.pop()
+print(data3)
+
+#3.인덱스 통해 삭제
+del data3[2]
+print(data3)
+
+#4.리스트 완전삭제
+data3.clear()
+print(data3)
+
+memo = ["나", "김지연","은","19세 남친을","원한다"]
+for me in memo:
+    print(me, end="")
+
+#memo의 3번째 인덱스열을 바꾼다
+memo[3] = "대머리 남친을"
+print()
+for me in memo:
+    print(me, end="")
+
+#메모의 1, 2, 3번째 인덱스를 바꾼다
+memo[1:4] = ["장영주","는","목발을"]
+print()
+for me in memo:
+    print(me,end="")
+
+#3번째 인덱스 자리에 추가
+memo.insert(3, "드러운 어그와")
+print(memo)
+
+#리스트 합치기
+memo1 =["이종빈","윤재영", "변수정"]
+memo2 =["장영주부","김지연세많음","이지현왕언니"]
+memo1.extend(memo2)
+print(memo1)
+#리스트 크기
+print(len(memo1))
+
+#리스트 생성
+#1.memo =["a","b","c"]
+#2.memo =["장","영","주","땡"]
+#데이터추가 memo.append("리정수")
+#데이터 삽입 memo.insert(2,"김민정수리")
+#데이터 삭제
+#삭제데이터 지정 memo.remove("땡")
+#마지막데이터 삭제 memo.pop
+#인덱스로 삭제 del memo[3]
+#리스트 합치기 memo.extend(리스트)
+#리스트 크기 len()
+#갯수 구하기 장이라는 데이터가 몇개 있나? -> memo.count("장")
+#인덱스 탖기 영이라는 데이터는 몇번 인덱스인가? -> memo.index("영")
+#정렬 오름차순 memo.sort() 내림차순 memo.sort(reverse=True)
+#반전 memo.reverse()
+
+info501 = ["장영주는 폭력적이다.", "김지연은 연하만좋아한다", "윤재영은 옆반쌤좋아한다.","최윤도는 영주불행이 행복이다.","변수정은 생일이라 코딩이싫데.. ", "종빈이는 지금 게임한다"]
+
+#501호 딸기반 학생이름을 input으로 입력받기
+#info501에 해당 학생이름이 있다면 학생의 정보를 출력
+
+name = input("이름을 입력하세요 : ")
+for i in range(len(info501)):
+    if name in info501[i]:
+       print(info501[i])
+
+for info in info501:
+    if name in info:
+        print(info)
+
+#문제2 info501에서 좋아한다 문구가 있는 정보들 모두 출력
+for i in info501:
+    if "좋아한다" in i:
+        print(i)
+        
+num=[x for x in range(10)]
+print(num)
