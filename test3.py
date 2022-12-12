@@ -130,3 +130,66 @@ while True:
         com = ""
     if com in word: break
 print(com, cnt)
+
+
+# open("파일경로") : 파일여는거
+    # w : 쓰기, r : 읽기 , a : 추가
+
+# readlines() : 파일 전체 읽기, 한줄씩 가져와서 리스트에 저장
+# readline() : 파일 한 줄 읽기 
+# read() : 파일 전체 읽어오기
+# close() : 파일 닫기
+"""
+f = open("c:/test/question.txt","r", encoding="utf-8") 
+line = f.readlines()
+print(line)
+
+f.close() # 파일을 열어서 다읽었다면 닫아야한다.
+"""
+
+file=[]
+with open("c:/test/question.txt","r",encoding="utf-8") as f:
+    file = f.readlines()
+
+# 문자열 슬라이싱 
+    # "banana"[2:] -> "nana" 2번인덱스부터 끝까지 
+    # "banana"[2:4] -> "na"  2번인덱스부터 4번 인덱스 전까지
+    # "banana"[:4] -> "bana" 처음부터 4번 인덱스 전까지
+
+for i in range(len(file)):
+    file[i] = file[i][:len(file[i])-1] # 엔터문자 빼려고 -1
+
+    file[i] = file[i].split(" ") # file의 i번째 인덱스를 띄어쓰기 기준으로 잘라서 배열로 저장 => 여기서부턴 2차원배열임
+
+print(file)
+
+# 작성자 또는 제품명으로 검색하여 해당 작성자가 문의한 글의 전체 출력하기
+"""
+* 출력예시
+    작성자 : 윤재영
+    제목 : 출마선언합니다
+    작성일 " 2027-03-10
+    문의글 : 대선출정하고싶습니다. 도와주세요
+    =====================================
+    답변 : 1억 있어요?
+    답변일 : 2027-02-05
+"""
+#내가 푼 것
+search = input("이름 또는 제품명을 입력해주세요 : ")
+answer=""
+for i in file:
+    for k in i:
+        if search in k:
+            if answer != i:
+                answer=i
+                out = "작성자 : " + answer[1] + " \n제목 : " +answer[0] + " \n작성일 : " +answer[3]+ " \n문의글 : " +answer[2] +" \n==============================="+" \n답변 : " +answer[4]+ " \n답변일 : "+answer[5]
+                print(out) 
+
+# 쌤이 푼 것
+search = input("작성자 또는 제품명 : ")
+for qus in file:
+    for i in range(len(qus)):
+        if search in qus[i]:
+            print("작성자 : {0} \n제목 : {1} \n작성일 : {2} \n문의글 : {3}".format(qus[0],qus[1],qus[3],qus[2]))
+            print("\n===============================\n답변 :{0}  \n답변일 : {1}".format(qus[4],qus[5]))
+            break
