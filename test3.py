@@ -109,3 +109,24 @@ if len(num) !=0: #len(num) -> num 리스트의 크기값 0이라면 없다, not 
     print(num)
 else:
     print("num은 비었다")
+
+
+
+word = ["boy", "table", "book", "girl","interest", "limit", "endless", "mission",
+"hopi", "tigerprint"]
+
+eng =["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
+
+# eng 리스트의 알파벳을 무작위 조합해서 word의 단어중 1개이상 나오는 경우
+# 몇번째 조합에서 나오는지 출력
+com =""
+cnt=0
+  
+while True:
+    for i in range(random.randint(3,10)):
+        com += random.choice(eng)
+    cnt += 1
+    if com not in word:
+        com = ""
+    if com in word: break
+print(com, cnt)
