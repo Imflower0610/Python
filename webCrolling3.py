@@ -24,7 +24,7 @@ from urllib.request import urlopen
 import pymysql
 
 #데이터 베이스 연결
-conn = pymysql.connect(host ='127.0.0.1', user='root', password = 'Wkwmdsk18!', db='kr',charset='utf-8')
+conn = pymysql.connect(host ='127.0.0.1', user='root', password = 'Wkwmdsk18!', db='dw_501',charset='utf8')
 #데이터베이스 연결 후에 커서 생성, 커서는 파이썬과 DB 사이를 연결해주는 드라이버의 형태
 #커서생성
 cur = conn.cursor()
@@ -83,15 +83,37 @@ for i in range(len(href_list)):
         th_list.append(th.text)
     size_td = size_t.select("td")
     for td in size_td:
-        td_list.append(td.text)
+        if (td.text).isdigit() : # 숫자로변환 가능한 문자열인가 확인하기
+            td_list.append(int(td.text))
+        else:
+            td_list.append(td.text)
 
     item_list[item_name] = dict(zip(th_list,td_list))
 
 
-cur.execute("insert into outers values('" +"word"+"')")
-print( item_list)
 
 
 # find -> tag로 찾기, # select -> css 선택자로 찾기
 # find -> 태그 1개찾기 # findAll -> 태그 여러개 
 # select -> 선택자에 해당하는 모든 태그 # selectOne -> 1개 태그
+
+db_column =['색상','소재','모델착용','세탁팁','사이즈','어깨단면','어깨길이','소매길이','암홀','가슴단면','총기장','트임','소매트임']
+
+for name in item_list:
+    item_title = list(item_list[name].keys()) # 딕셔너리의 키를 리스트로 변환
+    item_value=[] # 실제 상품의 정보값들을 저장할 리스트(DB저장용)
+    i=0
+    for col in db_column: # 가져온 상품 명칭이 db컬럼과 일치하는것만 골라서 값넣어주기위한것
+        if col in item_title[i]:  #실제 상품정보의 명칭이 db컬럼과일치하면 값저장
+            item_value.append(item_list[name][item_title[i]])
+            i+=1
+        else: # 실제 상품정보의 명칭이 db컬럼과 일치하지않으면 0 저장
+            item_value.append(0)
+
+    cur.execute( "insert into outers(item_name,item_color,item_mat,item_modelwear,item_washing,item_size,item_shoulder,item_shoulder_len,item_sleeve,item_armhole,item_chest,item_len,item_open,item_opensleeve) values('{0}','{1}','{2}','{3}','{4}','{5}',{6},{7},{8},{9},{10},{11},{12},{13})".format(name,item_value[0],item_value[1],item_value[2],item_value[3],item_value[4],
+    item_value[5],item_value[6],item_value[7],item_value[8],item_value[9],item_value[10],
+    item_value[11],item_value[12]))
+    
+    conn.commit()
+
+conn.close()
